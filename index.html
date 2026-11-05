@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hiba El Hamydy</title>
+<meta name="description" content="Hiba El Hamydy, full-stack software engineer. PHP, JavaScript, React, SQL. English and French.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,50,1;1,9..144,300..700,50,1&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a working notebook. One reading column, a margin to its right for
+   handwritten notes, highlighter on the phrases that matter. No cards, no grids of tiles. */
+:root{
+  --paper:#F6F7F4; --ink:#1B2433; --soft:#5B6474; --rule:#D9DDD6;
+  --pencil:#C8412F; --marker:rgba(255,222,77,.75);
+  --f-display:"Fraunces", "Iowan Old Style", Georgia, serif;
+  --f-body:"Public Sans", "Segoe UI", system-ui, sans-serif;
+  --f-hand:"Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#12161D; --ink:#E6E3DA; --soft:#A2A6AE; --rule:#2B313C;
+  --pencil:#FF8A6B; --marker:rgba(214,176,40,.38); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#12161D; --ink:#E6E3DA; --soft:#A2A6AE; --rule:#2B313C;
+  --pencil:#FF8A6B; --marker:rgba(214,176,40,.38); color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.65}
+.page{max-width:980px; margin:0 auto; padding-left:max(20px, env(safe-area-inset-left, 0px)); padding-right:max(20px, env(safe-area-inset-right, 0px)); padding-block:28px 64px}
+a{color:inherit; text-decoration-color:var(--pencil); text-decoration-thickness:1.5px; text-underline-offset:4px}
+a:hover{color:var(--pencil)}
+a:focus-visible, button:focus-visible{outline:2px solid var(--pencil); outline-offset:3px}
+p{margin:0}
+h1,h2,h3{font-family:var(--f-display); font-weight:500; margin:0; text-wrap:balance; font-variation-settings:"SOFT" 50, "WONK" 1}
+mark{background:linear-gradient(100deg, transparent 2%, var(--marker) 4%, var(--marker) 94%, transparent 97%); color:inherit; padding:0 .15em; margin:0 -.05em; border-radius:.2em .5em .3em .4em; background-repeat:no-repeat; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+
+#site[data-lang="en"] [lang="fr"], #site[data-lang="fr"] [lang="en"]{display:none}
+
+/* top line */
+.top{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; font-size:.9rem; color:var(--soft)}
+.top nav{display:flex; gap:18px; flex-wrap:wrap}
+.top nav a{text-decoration:none}
+.lang{display:flex; gap:4px; align-items:baseline}
+.lang button{font:inherit; background:none; border:0; padding:2px 4px; color:var(--soft); cursor:pointer}
+.lang button[aria-pressed="true"]{color:var(--ink); text-decoration:underline; text-decoration-color:var(--pencil); text-decoration-thickness:1.5px; text-underline-offset:4px}
+@media (max-width:560px){ .top nav{display:none} }
+
+/* notebook rows: text + margin */
+.row{display:grid; grid-template-columns:minmax(0, 620px) minmax(0, 1fr); column-gap:56px; align-items:start}
+.note{font-family:var(--f-hand); color:var(--pencil); font-size:1.45rem; line-height:1.1; padding-top:6px; transform:rotate(-2deg); transform-origin:left top; max-width:220px; position:relative; margin-top:var(--nt,0)}
+.note svg{display:block; width:46px; height:26px; margin-bottom:2px}
+.note svg path{fill:none; stroke:var(--pencil); stroke-width:2; stroke-linecap:round}
+@media (max-width:820px){
+  .row{grid-template-columns:1fr}
+  .note{margin-top:14px; transform:rotate(-1.5deg); max-width:none}
+  .note svg{display:none}
+}
+
+/* hello */
+.hello{margin-top:72px}
+.hello h1{font-size:clamp(3rem, 9vw, 6.2rem); line-height:.95; letter-spacing:-.025em; font-weight:400}
+.hello h1 em{font-style:italic; font-weight:300}
+.hello .intro{margin-top:28px; font-size:1.22rem; line-height:1.55; display:grid; gap:16px}
+.hello .what{margin-top:22px; color:var(--soft); font-size:.95rem}
+
+/* sections */
+section{margin-top:88px}
+.label{font-family:var(--f-display); font-style:italic; font-size:1.05rem; color:var(--soft); margin-bottom:6px}
+section h2{font-size:clamp(1.9rem, 4.4vw, 2.6rem); line-height:1.1; letter-spacing:-.015em}
+.prose{display:grid; gap:16px; margin-top:22px}
+.prose p{max-width:62ch}
+.meta{color:var(--soft); font-size:.92rem}
+
+/* job */
+.job + .job{margin-top:40px}
+.job h3{font-size:1.4rem; font-weight:500}
+.job h3 span.at{font-style:italic; font-weight:300}
+.job .when{color:var(--soft); font-size:.92rem; margin-top:2px; font-variant-numeric:tabular-nums}
+.job ul{margin:14px 0 0; padding:0; list-style:none; display:grid; gap:10px; max-width:62ch}
+.job li{padding-left:22px; position:relative}
+.job li::before{content:"–"; position:absolute; left:2px; color:var(--pencil)}
+
+/* the export fix */
+.fix{margin-top:28px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding-block:20px; max-width:620px}
+.fix p.h{font-family:var(--f-display); font-size:1.15rem}
+.fix pre{font-family:var(--f-mono); font-size:.8rem; color:var(--soft); margin:12px 0 18px; overflow-x:auto; line-height:1.55}
+.times{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:8px 14px; align-items:center; font-size:.9rem; font-variant-numeric:tabular-nums}
+.times .line{height:9px; border-radius:6px 3px 7px 4px; background:var(--soft); opacity:.45}
+.times .line.after{background:var(--pencil); opacity:1; width:3%; min-width:8px}
+.times .k{color:var(--soft)}
+
+/* projects */
+.proj{margin-top:34px; padding-top:26px; border-top:1px solid var(--rule)}
+.proj:first-of-type{border-top:0; padding-top:0}
+.proj h3{font-size:1.5rem}
+.proj .why{margin-top:6px; font-style:italic; font-family:var(--f-display); font-weight:300; font-size:1.1rem}
+.proj p.d{margin-top:12px; max-width:62ch}
+.proj .stack{margin-top:10px; font-family:var(--f-mono); font-size:.78rem; color:var(--soft)}
+.wide-demo{margin:18px 0 0; transform:rotate(-.6deg)}
+.wide-demo video{display:block; width:100%; max-width:100%; aspect-ratio:1086/542; border:1px solid var(--rule); border-top:14px solid var(--ink); border-radius:8px; background:var(--rule); object-fit:cover; box-shadow:0 10px 30px -18px rgba(0,0,0,.35)}
+.proj .live{margin-top:10px; font-family:var(--f-display); font-size:1.1rem}
+.pipe{list-style:none; margin:28px 0 26px; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:14px; counter-reset:none}
+.pipe li{position:relative; min-width:0}
+.pipe li:not(:last-child)::after{content:"→"; position:absolute; right:-13px; top:34%; font-family:var(--f-hand); font-size:1.6rem; color:var(--pencil); z-index:1}
+.pipe figure{margin:0}
+.pipe img{display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border-radius:3px; background:#000}
+.pipe li:nth-child(odd) img{transform:rotate(-.8deg)} .pipe li:nth-child(even) img{transform:rotate(.7deg)}
+.pipe figcaption{margin-top:8px; display:grid; line-height:1.25}
+.pipe figcaption b{font-family:var(--f-hand); color:var(--pencil); font-size:1.3rem; font-weight:700}
+.pipe figcaption span{font-size:.82rem; color:var(--soft); font-variant-numeric:tabular-nums}
+@media (max-width:760px){ .pipe{grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px 14px} .pipe li:nth-child(2)::after{display:none} }
+.res{border-collapse:collapse; font-size:.92rem; font-variant-numeric:tabular-nums; margin-top:6px}
+.res caption{text-align:left; font-family:var(--f-display); font-style:italic; color:var(--soft); padding-bottom:6px}
+.res th,.res td{padding:6px 18px 6px 0; text-align:left; border-bottom:1px solid var(--rule)}
+.res th{font-weight:600; font-size:.82rem; color:var(--soft)}
+.res tr.win td{font-weight:600}
+.res tr.win td:first-child{background:linear-gradient(100deg, transparent 2%, var(--marker) 4%, var(--marker) 94%, transparent 97%)}
+#site[data-lang="en"] caption[lang="fr"], #site[data-lang="fr"] caption[lang="en"]{display:none}
+.has-demo{display:grid; grid-template-columns:minmax(0,1fr) 190px; gap:28px; align-items:start}
+.has-demo .txt{grid-column:1; grid-row:1; min-width:0}
+.demo{grid-column:2; grid-row:1; margin:0; transform:rotate(1.5deg)}
+.demo video{display:block; width:100%; max-width:100%; aspect-ratio:328/716; border:6px solid var(--ink); border-radius:22px; background:var(--rule); object-fit:cover}
+.demo figcaption{font-family:var(--f-hand); color:var(--pencil); font-size:1.2rem; line-height:1.1; margin-top:8px; text-align:center; transform:rotate(-2.5deg)}
+@media (max-width:560px){ .has-demo{grid-template-columns:1fr} .demo{grid-column:1; grid-row:2; max-width:220px; margin:4px auto 0} }
+
+/* tools */
+.tools{margin-top:22px; display:grid; gap:14px; max-width:62ch}
+.tools p b{font-weight:600}
+
+/* languages */
+.langs{margin-top:22px; display:grid; gap:12px; max-width:62ch}
+.langs div{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; border-bottom:1px dashed var(--rule); padding-bottom:10px}
+.langs span.s{color:var(--soft); font-size:.92rem}
+
+/* hello again */
+.contact h2{font-size:clamp(2.4rem, 7vw, 4.4rem); line-height:1; font-weight:400}
+.contact .mail{margin-top:22px; display:flex; flex-wrap:wrap; gap:14px; align-items:baseline}
+.contact .addr{font-family:var(--f-display); font-size:clamp(1.15rem, 3.4vw, 1.6rem); word-break:break-all; user-select:all}
+.contact button{font:inherit; font-size:.9rem; background:none; border:1px solid var(--ink); color:var(--ink); padding:4px 12px; border-radius:20px 18px 22px 16px; cursor:pointer}
+.contact button:hover{border-color:var(--pencil); color:var(--pencil)}
+.contact .else{margin-top:16px; display:flex; gap:22px; flex-wrap:wrap}
+footer{margin-top:80px; color:var(--soft); font-size:.85rem; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+
+@media (prefers-reduced-motion:no-preference){
+  mark{background-size:100% 100%; animation:swipe .9s .3s ease-out both}
+  @keyframes swipe{from{background-size:0% 100%; background-repeat:no-repeat}to{background-size:100% 100%; background-repeat:no-repeat}}
+}
+</style>
+</head>
+<body>
+
+
+<div id="site" data-lang="en">
+<div class="page">
+
+  <header class="top">
+    <span>Hiba El Hamydy</span>
+    <nav aria-label="Sections">
+      <a href="#work"><span lang="en">work</span><span lang="fr">travail</span></a>
+      <a href="#built"><span lang="en">side projects</span><span lang="fr">projets perso</span></a>
+      <a href="#hello">contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language / Langue">
+      <button type="button" id="btn-en" data-set="en" aria-pressed="true">English</button><span aria-hidden="true">/</span><button type="button" id="btn-fr" data-set="fr" aria-pressed="false">Français</button>
+    </div>
+  </header>
+
+  <div class="hello">
+    <h1><span lang="en">Hi, I'm <em>Hiba.</em></span><span lang="fr">Bonjour, moi c'est <em>Hiba.</em></span></h1>
+    <div class="row">
+      <div class="intro">
+        <p lang="en">I'm a full-stack engineer. For the past few years I've been building the software that social-aid funds use to review applications, <mark>pay people on time</mark> and close their books at the end of the month.</p>
+        <p lang="fr">Je suis ingénieure full-stack. Depuis quelques années, je construis le logiciel qu'utilisent des fonds d'aide sociale pour instruire les demandes, <mark>payer les gens à temps</mark> et clôturer leur comptabilité chaque mois.</p>
+        <p lang="en">Most of my days happen where PHP, JavaScript and SQL meet a very specific business rule that somebody explained to me in a meeting that morning.</p>
+        <p lang="fr">La plupart de mes journées se passent là où PHP, JavaScript et SQL rencontrent une règle métier très précise qu'on m'a expliquée en réunion le matin même.</p>
+      </div>
+      <p class="note">
+        <svg viewBox="0 0 46 26" aria-hidden="true"><path d="M44 4 C 30 2, 12 6, 6 20 M6 20 L 4 11 M6 20 L 14 17"/></svg>
+        <span lang="en">and yes, those meetings are in French</span><span lang="fr">et oui, ces réunions sont en français</span>
+      </p>
+    </div>
+    <p class="what"><span lang="en">PHP · JavaScript · React · SQL · English and French, every day</span><span lang="fr">PHP · JavaScript · React · SQL · français et anglais, au quotidien</span></p>
+  </div>
+
+  <section id="work">
+    <p class="label"><span lang="en">what I do</span><span lang="fr">ce que je fais</span></p>
+    <h2><span lang="en">Work</span><span lang="fr">Travail</span></h2>
+
+    <div class="row">
+      <div>
+        <div class="job" style="margin-top:26px">
+          <h3><span lang="en">Software engineer</span><span lang="fr">Ingénieure logiciel</span> <span class="at"><span lang="en">at</span><span lang="fr">chez</span> Bee Smart Digital</span></h3>
+          <p class="when"><span lang="en">March 2024 to now · remote</span><span lang="fr">Depuis mars 2024 · à distance</span></p>
+          <div class="prose">
+            <p lang="en">We build a platform for public social-aid programmes, including the Fonds d'aide aux jeunes and the Fonds de solidarité logement. It handles housing, energy and guarantee aid from the first application all the way to payment and accounting. I write the code, and I also sit with clients to work out what the code should do.</p>
+            <p lang="fr">Nous développons une plateforme pour des dispositifs publics d'aide sociale, dont le Fonds d'aide aux jeunes et le Fonds de solidarité logement. Elle gère les aides au logement, à l'énergie et les garanties, de la première demande jusqu'au paiement et à la comptabilité. J'écris le code, et je m'assois aussi avec les clients pour définir ce qu'il doit faire.</p>
+          </div>
+          <ul>
+            <li lang="en">I run the requirements meetings, draw the process in yEd so everyone agrees on it, then write the spec and build it.</li>
+            <li lang="fr">J'anime les ateliers de besoins, je dessine le processus dans yEd pour que tout le monde soit d'accord, puis j'écris la spec et je la développe.</li>
+            <li lang="en">I built and look after <mark>the whole payments workflow</mark>: search, cancellations, rejections and the correction loop that follows, receipts, and IBAN/BIC checks.</li>
+            <li lang="fr">J'ai construit et je maintiens <mark>tout le circuit de paiement</mark> : recherche, annulations, rejets et la boucle de correction qui suit, reçus et contrôles IBAN/BIC.</li>
+            <li lang="en">Case workers and accountants used to prepare monthly statements, guarantee lists and partner imports by hand. Those are now one-click exports.</li>
+            <li lang="fr">Les agents et les comptables préparaient à la main les états mensuels, les listes de garanties et les imports partenaires. Ce sont maintenant des exports en un clic.</li>
+            <li lang="en">I built the committee and appeals workflows: status checks, document signing, email notifications, and who is allowed to do what.</li>
+            <li lang="fr">J'ai développé les circuits de commission et de recours : contrôle des statuts, signature de documents, notifications par courriel et droits selon le rôle.</li>
+            <li lang="en">I also make the KPI dashboards and the monthly and yearly reports that directors open in Excel or PDF, and I helped launch the public portal where applicants apply online.</li>
+            <li lang="fr">Je réalise aussi les tableaux de bord et les rapports mensuels et annuels que les directions ouvrent en Excel ou en PDF, et j'ai participé au lancement du portail public où les demandeurs déposent leur dossier.</li>
+          </ul>
+
+          <div class="fix">
+            <p class="h"><span lang="en">The export that took three minutes</span><span lang="fr">L'export qui prenait trois minutes</span></p>
+            <p style="margin-top:6px; max-width:58ch"><span lang="en">Accountants would click export and go make coffee. I went through the slow-query log, rewrote the joins and added the indexes that were missing.</span><span lang="fr">Les comptables lançaient l'export et partaient se faire un café. J'ai épluché le journal des requêtes lentes, réécrit les jointures et ajouté les index qui manquaient.</span></p>
+            <pre>-- <span lang="en">simplified</span><span lang="fr">simplifiée</span>
+SELECT … FROM paiement p
+JOIN dossier d ON d.id = p.dossier_id
+WHERE p.statut = ? AND p.date_valid BETWEEN ? AND ?;</pre>
+            <div class="times">
+              <span class="k"><span lang="en">before</span><span lang="fr">avant</span></span><span class="line"></span><span><span lang="en">up to 3 min</span><span lang="fr">jusqu'à 3 min</span></span>
+              <span class="k"><span lang="en">after</span><span lang="fr">après</span></span><span><span class="line after" style="display:block"></span></span><span><span lang="en">a few seconds</span><span lang="fr">quelques secondes</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="--nt:420px">
+        <svg viewBox="0 0 46 26" aria-hidden="true"><path d="M44 20 C 34 22, 14 18, 6 6 M6 6 L 6 15 M6 6 L 14 8"/></svg>
+        <span lang="en">my favourite fix so far. nobody misses the coffee breaks</span><span lang="fr">ma correction préférée. personne ne regrette les pauses café</span>
+      </p>
+    </div>
+
+    <div class="job" style="margin-top:56px">
+      <p class="label"><span lang="en">before that</span><span lang="fr">avant ça</span></p>
+      <h3><span lang="en">Teaching a model to invent teeth</span><span lang="fr">Apprendre à un modèle à inventer des dents</span></h3>
+      <p class="when"><span lang="en">Final-year engineering project · 3D Smart Factory, R&amp;D 3D-AI team · Feb to Aug 2023</span><span lang="fr">Projet de fin d'études · 3D Smart Factory, équipe R&amp;D 3D-IA · février à août 2023</span></p>
+      <div class="prose">
+        <p lang="en">Medical research needs data, and dental scans are slow and expensive to collect. They're also tightly protected, because they belong to real patients. We had 31 scanned dental arches. My job was to train a generative model that could produce new, realistic arches that don't belong to anyone.</p>
+        <p lang="fr">La recherche médicale a besoin de données, et les scans dentaires sont longs et coûteux à collecter. Ils sont aussi très protégés, car ils appartiennent à de vrais patients. Nous avions 31 arcades dentaires scannées. Ma mission : entraîner un modèle génératif capable de produire de nouvelles arcades réalistes qui n'appartiennent à personne.</p>
+      </div>
+
+      <ol class="pipe">
+        <li><figure><img src="media/pfe-1-scan.jpg" alt="Raw 3D scan of an upper dental arch, including the gum and base" width="480" height="360" loading="lazy"><figcaption><b lang="en">the raw scan</b><b lang="fr">le scan brut</b><span lang="en">83,000 faces, 14 MB</span><span lang="fr">83 000 faces, 14 Mo</span></figcaption></figure></li>
+        <li><figure><img src="media/pfe-2-teeth.jpg" alt="The same arch with the gum and base removed, simplified mesh" width="480" height="360" loading="lazy"><figcaption><b lang="en">gum removed, simplified</b><b lang="fr">gencive retirée, simplifié</b><span lang="en">12,000 faces, 300 KB</span><span lang="fr">12 000 faces, 300 Ko</span></figcaption></figure></li>
+        <li><figure><img src="media/pfe-3-points.jpg" alt="The arch converted to a point cloud of yellow points" width="480" height="360" loading="lazy"><figcaption><b lang="en">turned into points</b><b lang="fr">transformé en points</b><span lang="en">2,048 x, y, z points</span><span lang="fr">2 048 points x, y, z</span></figcaption></figure></li>
+        <li><figure><img src="media/pfe-4-generated.jpg" alt="A new dental arch point cloud generated by the latent GAN" width="480" height="360" loading="lazy"><figcaption><b lang="en">a brand-new arch</b><b lang="fr">une arcade inédite</b><span lang="en">generated by the latent GAN</span><span lang="fr">générée par le latent GAN</span></figcaption></figure></li>
+      </ol>
+
+      <div class="row">
+        <div class="prose">
+          <p lang="en">I compared two approaches on ShapeNet chairs, lamps and tables first. A raw GAN works directly on the points. A latent GAN first compresses each shape into 128 numbers with an autoencoder, then learns to generate those. The latent GAN won on every class, so I moved it over to the teeth.</p>
+          <p lang="fr">J'ai d'abord comparé deux approches sur les chaises, lampes et tables de ShapeNet. Un raw GAN travaille directement sur les points. Un latent GAN compresse d'abord chaque forme en 128 valeurs avec un auto-encodeur, puis apprend à générer ces valeurs. Le latent GAN l'a emporté sur chaque classe, je l'ai donc appliqué aux dents.</p>
+          <p lang="en">On the dental data it didn't work at first: the discriminator kept winning and the generator never caught up. The fix wasn't a hyperparameter. I changed how meshes became points, using the mesh's own vertex coordinates instead of random surface sampling, and training finally converged. The model ended up tripling the dataset with arches that were new, not copies.</p>
+          <p lang="fr">Sur les données dentaires, ça ne marchait pas au début : le discriminateur gagnait toujours et le générateur ne rattrapait jamais son retard. La solution n'était pas un hyperparamètre. J'ai changé la façon de transformer les maillages en points, en utilisant les coordonnées des sommets plutôt qu'un échantillonnage aléatoire de surface, et l'entraînement a enfin convergé. Le modèle a triplé le jeu de données avec des arcades nouvelles, pas des copies.</p>
+          <table class="res">
+            <caption><span lang="en">Dental arches, generated vs real</span><span lang="fr">Arcades dentaires, générées vs réelles</span></caption>
+            <thead><tr><th></th><th><span lang="en">coverage</span><span lang="fr">couverture</span> ↑</th><th><span lang="en">fidelity gap</span><span lang="fr">écart de fidélité</span> ↓</th></tr></thead>
+            <tbody><tr><td>raw GAN</td><td>16</td><td>0.80</td></tr><tr class="win"><td>latent GAN</td><td>31</td><td>0.04</td></tr></tbody>
+          </table>
+          <p class="stack">Python · PyTorch · PyTorch3D · Trimesh · NumPy · MeshLab</p>
+        </div>
+        <p class="note" style="--nt:150px">
+          <svg viewBox="0 0 46 26" aria-hidden="true"><path d="M44 4 C 30 2, 12 6, 6 20 M6 20 L 4 11 M6 20 L 14 17"/></svg>
+          <span lang="en">presented and defended in French in front of a jury</span><span lang="fr">soutenu devant un jury, en français</span>
+        </p>
+      </div>
+
+      <ul style="margin-top:34px">
+        <li><span lang="en"><b>Lear Corporation</b>, data science intern, Aug to Sep 2022. I turned 15 INCOSE requirement-checking rules into NLP code with Python and spaCy, so engineers didn't have to check them by eye.</span><span lang="fr"><b>Lear Corporation</b>, stage en data science, août à septembre 2022. J'ai traduit 15 règles de vérification d'exigences INCOSE en code NLP avec Python et spaCy, pour que les ingénieurs n'aient plus à les vérifier à l'œil.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="built">
+    <p class="label"><span lang="en">evenings and weekends</span><span lang="fr">les soirs et week-ends</span></p>
+    <h2><span lang="en">Things I built for myself</span><span lang="fr">Ce que j'ai construit pour moi</span></h2>
+
+    <div class="row" style="margin-top:28px">
+      <div>
+        <article class="proj has-demo">
+          <figure class="demo">
+            <video src="media/masarif.mp4" poster="media/masarif-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Screen recording of Masarif: importing a statement, the monthly overview, setting budgets and searching transactions"></video>
+            <figcaption><span lang="en">the real app, with my real spending</span><span lang="fr">la vraie appli, avec mes vraies dépenses</span></figcaption>
+          </figure>
+          <div class="txt">
+          <h3><span lang="en">Masarif, a budget app that reads my bank notifications</span><span lang="fr">Masarif, une appli de budget qui lit mes notifications bancaires</span></h3>
+          <p class="why"><span lang="en">My bank has no API, so I listened to its push notifications instead.</span><span lang="fr">Ma banque n'a pas d'API, alors j'ai écouté ses notifications à la place.</span></p>
+          <p class="d"><span lang="en">A Flutter app with a small native Kotlin service that catches transaction alerts the moment they arrive. It also imports statements in PDF, CSV or spreadsheet form through a parser I wrote, sorts spending into categories, notices when a recurring bill changes, and warns me at 80% of a budget. Everything stays on the phone.</span><span lang="fr">Une appli Flutter avec un petit service Kotlin natif qui capte les alertes de transaction dès leur arrivée. Elle importe aussi les relevés PDF, CSV ou tableur grâce à un parseur que j'ai écrit, range les dépenses par catégorie, repère quand une facture récurrente change et m'avertit à 80 % d'un budget. Tout reste sur le téléphone.</span></p>
+          <p class="stack">Flutter · Dart · Kotlin · on-device storage</p>
+          </div>
+        </article>
+        <article class="proj">
+          <h3><span lang="en">Calcount, a recipe and calorie log</span><span lang="fr">Calcount, un carnet de recettes et de calories</span></h3>
+          <p class="why"><span lang="en">Logging lunch shouldn't take longer than eating it.</span><span lang="fr">Noter son déjeuner ne devrait pas prendre plus de temps que de le manger.</span></p>
+          <p class="d"><span lang="en">An installable React app. Scan a barcode and it pulls nutrition data from Open Food Facts. Recipes can be shared with the community or kept private. I also trained a small TensorFlow.js model that recognises food from a photo right in the browser, so the picture never gets uploaded anywhere.</span><span lang="fr">Une appli React installable. On scanne un code-barres et elle récupère les valeurs nutritionnelles sur Open Food Facts. Les recettes peuvent être partagées ou rester privées. J'ai aussi entraîné un petit modèle TensorFlow.js qui reconnaît un plat sur une photo directement dans le navigateur, sans jamais l'envoyer nulle part.</span></p>
+          <figure class="wide-demo">
+            <video src="media/calcount.mp4" poster="media/calcount-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Screen recording of Calcount: the daily tracker, community recipes, saved recipes and logging a meal"></video>
+          </figure>
+          <p class="stack">React 19 · Vite · TensorFlow.js · Firebase Auth · PWA</p>
+          <p class="live"><a href="https://calcount-ca620.web.app/" target="_blank" rel="noopener"><span lang="en">Try it live</span><span lang="fr">L'essayer en ligne</span> ↗</a></p>
+        </article>
+        <article class="proj">
+          <h3><span lang="en">Driver distraction detection</span><span lang="fr">Détection de distraction au volant</span></h3>
+          <p class="why"><span lang="en">A warning is only useful if it comes in time.</span><span lang="fr">Une alerte n'est utile que si elle arrive à temps.</span></p>
+          <p class="d"><span lang="en">A real-time model that spots a distracted driver and raises an alert, served through a FastAPI backend with a Next.js front end.</span><span lang="fr">Un modèle temps réel qui repère un conducteur distrait et déclenche une alerte, servi par un backend FastAPI avec une interface Next.js.</span></p>
+          <p class="stack">Python · FastAPI · React · Next.js</p>
+        </article>
+      </div>
+      <p class="note" style="--nt:40px">
+        <svg viewBox="0 0 46 26" aria-hidden="true"><path d="M44 18 C 30 24, 12 20, 5 8 M5 8 L 4 17 M5 8 L 13 10"/></svg>
+        <span lang="en">the one I actually use every day</span><span lang="fr">celle que j'utilise vraiment tous les jours</span>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="label"><span lang="en">the toolbox</span><span lang="fr">la boîte à outils</span></p>
+    <h2><span lang="en">What I reach for</span><span lang="fr">Mes outils</span></h2>
+    <div class="tools">
+      <p lang="en"><b>Every day:</b> PHP (a custom MVC framework), JavaScript, MySQL and MariaDB, Git.</p>
+      <p lang="fr"><b>Tous les jours :</b> PHP (un framework MVC maison), JavaScript, MySQL et MariaDB, Git.</p>
+      <p lang="en"><b>Also comfortable with:</b> React and Next.js, Python with FastAPI or Django, PostgreSQL, SQL Server, MongoDB, Docker, SVN.</p>
+      <p lang="fr"><b>À l'aise aussi avec :</b> React et Next.js, Python avec FastAPI ou Django, PostgreSQL, SQL Server, MongoDB, Docker, SVN.</p>
+      <p lang="en"><b>On the database side:</b> indexing, reading query plans, stored procedures, triggers and migrations.</p>
+      <p lang="fr"><b>Côté base de données :</b> indexation, lecture des plans d'exécution, procédures stockées, triggers et migrations.</p>
+      <p lang="en"><b>Before any code:</b> requirements workshops, process diagrams in yEd, role-based access design, Scrum. And Power BI or Excel when someone needs the numbers.</p>
+      <p lang="fr"><b>Avant le code :</b> ateliers de besoins, diagrammes de processus dans yEd, conception des droits par rôle, Scrum. Et Power BI ou Excel quand quelqu'un a besoin des chiffres.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="label"><span lang="en">the paperwork</span><span lang="fr">les papiers</span></p>
+    <h2><span lang="en">School and languages</span><span lang="fr">Études et langues</span></h2>
+    <div class="prose">
+      <p lang="en">Master's in Intelligent Information Systems Engineering (2021–2023), after a bachelor's in Information Systems Engineering (2020–2021), both at the Graduate School of Management, Computer Science and Telecommunications. Certified in Scrum (SFPC) and in Data Analysis with Python (IBM).</p>
+      <p lang="fr">Master en ingénierie des systèmes d'information intelligents (2021–2023), après une licence en ingénierie des systèmes d'information (2020–2021), à l'École supérieure de management, d'informatique et de télécommunications. Certifiée Scrum (SFPC) et Data Analysis with Python (IBM).</p>
+    </div>
+    <div class="langs">
+      <div><span><span lang="en">English</span><span lang="fr">Anglais</span></span><span class="s"><span lang="en">full professional · IELTS 8.0</span><span lang="fr">professionnel complet · IELTS 8.0</span></span></div>
+      <div><span><span lang="en">French</span><span lang="fr">Français</span></span><span class="s"><span lang="en">what I work in with clients · TCF C1/C2</span><span lang="fr">ma langue de travail avec les clients · TCF C1/C2</span></span></div>
+      <div><span><span lang="en">Arabic</span><span lang="fr">Arabe</span></span><span class="s"><span lang="en">native</span><span lang="fr">langue maternelle</span></span></div>
+    </div>
+  </section>
+
+  <section id="hello" class="contact">
+    <h2><span lang="en">Say hello.</span><span lang="fr">Écrivez-moi.</span></h2>
+    <div class="prose"><p><span lang="en">I'm looking for a full-stack or backend role, on-site or remote. If your team builds software that real people depend on, I'd like to hear about it.</span><span lang="fr">Je cherche un poste full-stack ou backend, sur site ou à distance. Si votre équipe construit un logiciel dont de vraies personnes dépendent, j'aimerais en entendre parler.</span></p></div>
+    <div class="mail">
+      <span class="addr" id="email">hiba.elhamydy01@gmail.com</span>
+      <button type="button" id="copy"><span lang="en">copy</span><span lang="fr">copier</span></button>
+    </div>
+    <div class="else">
+      <a href="https://linkedin.com/in/hiba-el-hamydy" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hibaelhamydy" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Hiba El Hamydy</span>
+    <span><span lang="en">updated November 2026</span><span lang="fr">mis à jour en novembre 2026</span></span>
+  </footer>
+</div>
+</div>
+
+<script>
+(function(){
+  var site=document.getElementById('site');
+  function setLang(l){
+    site.dataset.lang=l; document.documentElement.lang=l;
+    document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed', String(b.dataset.set===l));});
+    try{localStorage.setItem('lang',l);}catch(e){}
+  }
+  var saved=null; try{saved=localStorage.getItem('lang');}catch(e){}
+  if(!saved && (navigator.language||'').slice(0,2)==='fr') saved='fr';
+  setLang(saved==='fr'?'fr':'en');
+  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.set);});});
+  var btn=document.getElementById('copy'), label=btn.innerHTML;
+  btn.addEventListener('click',function(){
+    var el=document.getElementById('email');
+    var done=function(){btn.textContent=site.dataset.lang==='fr'?'copié ✓':'copied ✓'; setTimeout(function(){btn.innerHTML=label;},1800);};
+    var select=function(){var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r);};
+    try{navigator.clipboard.writeText(el.textContent).then(done,select);}catch(e){select();}
+  });
+})();
+</script>
+
+</body>
+</html>
